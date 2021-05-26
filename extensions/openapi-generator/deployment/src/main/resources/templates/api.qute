@@ -1,0 +1,9 @@
+package {package};
+
+{#for imp in imports}
+import {imp.import};
+{/for}
+
+public interface {classname} {
+
+}
