@@ -13,7 +13,6 @@ import java.util.Map;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.Path;
 import org.jboss.resteasy.annotations.jaxrs.*;
 
 {#insert disableMultipart}
@@ -23,8 +22,7 @@ import org.apache.cxf.jaxrs.ext.multipart.*;
 {#if appName}
 /**
   * {appName}
-  * <p/>
-  * {appDescription}
+  * {#if appDescription}<p/>{appDescription}{/if}
   */
 {/if}
 @Path("{#if useAnnotatedBasePath}{contextPath}{/if}{commonPath}")
@@ -32,6 +30,16 @@ import org.apache.cxf.jaxrs.ext.multipart.*;
 public interface {classname} {
 
     {#for op in operations.operation}
+    {#if op.summary}
+    /**
+     * {op.summary}
+     *
+     {#if op.notes}
+     * {op.notes}
+     *
+     {/if}
+     */
+    {/if}
     @{op.httpMethod}
     {#if op.subresourceOperation}
     @Path("{op.path}")

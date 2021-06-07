@@ -1,0 +1,31 @@
+{#if e.jackson}
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+{/if}
+
+/**
+ * {#insert e.description}Gets or Sets {e.name}{/}{#if e.description}{description}{/}
+ */
+{#include additionalEnumTypeAnnotations.qute e=e/}public enum {#for dataType in e.datatypeWithEnum}{dataType}{/for}{#insert e.datatypeWithEnum}{e.classname}{/} {
+    private {e.dataType} value;
+
+    {#for dataType in e.datatypeWithEnum}{dataType}{/for}{#insert e.datatypeWithEnum}{e.classname}{/}({e.dataType} value){
+        this.value = value;
+    }
+
+    @Override
+    {#if e.jackson}@JsonValue{/}
+    public String toString() {
+        return String.valueOf(value);
+    }
+
+    {#if e.jackson}@JsonCreator{/}
+    public static {#for dataType in e.datatypeWithEnum}{dataType}{/for}{#insert e.datatypeWithEnum}{e.classname}{/} fromValue(String text) {
+        for ({#for dataType in e.datatypeWithEnum}{dataType}{/for}{#insert e.datatypeWithEnum}{e.classname}{/} b : {#for dataType in e.datatypeWithEnum}{dataType}{/for}{#insert e.datatypeWithEnum}{e.classname}{/}.values()) {
+            if (String.valueOf(b.value).equals(text)) {
+                return b;
+            }
+        }
+        {#if e.useNullForUnknownEnumValue}return null;{#else}throw new IllegalArgumentException("Unexpected value '" + text + "'");{/if}
+    }
+}

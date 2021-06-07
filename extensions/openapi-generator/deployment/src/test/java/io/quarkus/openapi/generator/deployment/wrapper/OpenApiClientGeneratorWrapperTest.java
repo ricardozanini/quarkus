@@ -1,4 +1,4 @@
-package io.quarkus.openapi.generator.deployment;
+package io.quarkus.openapi.generator.deployment.wrapper;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.List;
 
+import io.quarkus.openapi.generator.deployment.wrapper.OpenApiClientGeneratorWrapper;
 import org.junit.jupiter.api.Test;
 
 public class OpenApiClientGeneratorWrapperTest {

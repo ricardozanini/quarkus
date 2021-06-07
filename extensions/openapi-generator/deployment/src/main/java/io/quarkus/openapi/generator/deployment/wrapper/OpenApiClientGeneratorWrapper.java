@@ -1,4 +1,4 @@
-package io.quarkus.openapi.generator.deployment;
+package io.quarkus.openapi.generator.deployment.wrapper;
 
 import java.io.File;
 import java.util.List;
@@ -35,6 +35,7 @@ public class OpenApiClientGeneratorWrapper {
         GlobalSettings.setProperty(CodegenConstants.MODEL_DOCS, FALSE);
         // generates every Api and Supporting files
         GlobalSettings.setProperty(CodegenConstants.APIS, "");
+        GlobalSettings.setProperty(CodegenConstants.MODELS, "");
         GlobalSettings.setProperty(CodegenConstants.SUPPORTING_FILES, "");
         // logging
         GlobalSettings.setProperty(VERBOSE, FALSE);

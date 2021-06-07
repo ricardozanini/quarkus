@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.openapitools.codegen.DefaultGenerator;
 import org.openapitools.codegen.config.CodegenConfigurator;
 
-import io.quarkus.openapi.generator.deployment.QuarkusCodegenConfigurator;
+import io.quarkus.openapi.generator.deployment.wrapper.QuarkusCodegenConfigurator;
 
 public class QuteTemplatingEngineAdapterTest {
 

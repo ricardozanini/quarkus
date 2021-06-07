@@ -13,13 +13,19 @@ public class QuteTemplatingEngineAdapter extends AbstractTemplatingEngineAdapter
 
     public static final String IDENTIFIER = "qute";
     public static final String[] INCLUDE_TEMPLATES = {
-            "pathParams.qute",
-            "queryParams.qute",
+            "additionalEnumTypeAnnotations.qute",
+            "additionalModelTypeAnnotations.qute",
+            "beanValidation.qute",
+            "beanValidationCore.qute",
+            "beanValidationHeaderParams.qute",
             "bodyParams.qute",
+            "enumClass.qute",
+            "enumOuterClass.qute",
             "formParams.qute",
             "headerParams.qute",
-            "beanValidationCore.qute",
-            "beanValidationHeaderParams.qute"
+            "pathParams.qute",
+            "pojo.qute",
+            "queryParams.qute"
     };
     public final Engine engine;
 

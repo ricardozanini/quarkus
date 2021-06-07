@@ -1,4 +1,4 @@
-package io.quarkus.openapi.generator.deployment;
+package io.quarkus.openapi.generator.deployment.wrapper;
 
 import org.openapitools.codegen.config.CodegenConfigurator;
 import org.openapitools.codegen.languages.JavaClientCodegen;
