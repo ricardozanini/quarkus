@@ -18,7 +18,6 @@ public class QuarkusJavaClientCodegen extends JavaClientCodegen {
     @Override
     public void processOpts() {
         super.processOpts();
-        // TODO: review / add or remove what we need/support
         supportingFiles.clear();
         apiTemplateFiles.clear();
         apiTemplateFiles.put("api.qute", ".java");

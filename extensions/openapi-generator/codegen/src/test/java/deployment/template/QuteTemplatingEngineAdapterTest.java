@@ -1,4 +1,4 @@
-package io.quarkus.openapi.generator.deployment.template;
+package deployment.template;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;

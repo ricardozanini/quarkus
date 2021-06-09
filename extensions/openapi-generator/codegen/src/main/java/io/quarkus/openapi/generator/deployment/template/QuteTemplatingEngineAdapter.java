@@ -3,11 +3,12 @@ package io.quarkus.openapi.generator.deployment.template;
 import java.io.IOException;
 import java.util.Map;
 
+import org.openapitools.codegen.api.AbstractTemplatingEngineAdapter;
+import org.openapitools.codegen.api.TemplatingExecutor;
+
 import io.quarkus.qute.Engine;
 import io.quarkus.qute.ReflectionValueResolver;
 import io.quarkus.qute.Template;
-import org.openapitools.codegen.api.AbstractTemplatingEngineAdapter;
-import org.openapitools.codegen.api.TemplatingExecutor;
 
 public class QuteTemplatingEngineAdapter extends AbstractTemplatingEngineAdapter {
 
@@ -30,7 +31,6 @@ public class QuteTemplatingEngineAdapter extends AbstractTemplatingEngineAdapter
     public final Engine engine;
 
     public QuteTemplatingEngineAdapter() {
-        // TODO: inject from qute buildStep
         this.engine = Engine.builder()
                 .addDefaults()
                 .addValueResolver(new ReflectionValueResolver())
@@ -45,13 +45,12 @@ public class QuteTemplatingEngineAdapter extends AbstractTemplatingEngineAdapter
 
     @Override
     public String[] getFileExtensions() {
-        return new String[]{IDENTIFIER};
+        return new String[] { IDENTIFIER };
     }
 
     @Override
     public String compileTemplate(TemplatingExecutor executor, Map<String, Object> bundle, String templateFile)
             throws IOException {
-        // TODO: won't be necessary once we retrieve the engine from the BuildStep
         this.cacheTemplates(executor);
         Template template = engine.getTemplate(templateFile);
         if (template == null) {
@@ -61,7 +60,6 @@ public class QuteTemplatingEngineAdapter extends AbstractTemplatingEngineAdapter
         return template.data(bundle).render();
     }
 
-    // TODO: remove it once we have the Engine reference from BuildStep, which should cache all the templates automatically
     public void cacheTemplates(TemplatingExecutor executor) {
         for (String templateId : INCLUDE_TEMPLATES) {
             Template incTemplate = engine.getTemplate(templateId);
