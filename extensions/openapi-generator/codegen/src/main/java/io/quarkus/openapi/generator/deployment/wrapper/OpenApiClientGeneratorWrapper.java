@@ -55,6 +55,7 @@ public class OpenApiClientGeneratorWrapper {
     }
 
     public List<File> generate() {
+        // TODO: the output should be <package>.Class, not src/main/java
         return generator.opts(configurator.toClientOptInput()).generate();
     }
 }

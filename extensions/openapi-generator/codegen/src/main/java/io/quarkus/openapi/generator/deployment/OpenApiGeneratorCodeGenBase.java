@@ -19,21 +19,11 @@ import io.quarkus.utilities.OS;
  * <p>
  * Wraps the <a href="https://openapi-generator.tech/docs/generators/java">OpenAPI Generator Client for Java</a>
  */
-public class OpenApiGeneratorCodeGen implements CodeGenProvider {
+public abstract class OpenApiGeneratorCodeGenBase implements CodeGenProvider {
 
-    private static final String YAML = ".yaml";
-    private static final String YML = ".yml";
-    private static final String JSON = ".json";
-
-    @Override
-    public String providerId() {
-        return "openapi-generator";
-    }
-
-    @Override
-    public String inputExtension() {
-        return "json";
-    }
+    static final String YAML = ".yaml";
+    static final String YML = ".yml";
+    static final String JSON = ".json";
 
     @Override
     public String inputDirectory() {
