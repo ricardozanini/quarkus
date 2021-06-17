@@ -22,11 +22,14 @@ public class OpenApiClientGeneratorWrapper {
     private static final String MODEL_PACKAGE = "model";
     private static final String VERBOSE = "verbose";
     private static final String ONCE_LOGGER = "org.openapitools.codegen.utils.oncelogger.enabled";
+    private static final String MVN_MAIN = "src/main/java";
 
     private final QuarkusCodegenConfigurator configurator;
     private final DefaultGenerator generator;
+    private final String outputDir;
 
     public OpenApiClientGeneratorWrapper(final String specFilePath, final String outputDir) {
+        this.outputDir = outputDir;
         // TODO: expose these properties as quarkus.generate-code.openapi.client.*
         // do not generate docs nor tests
         GlobalSettings.setProperty(CodegenConstants.API_DOCS, FALSE.toString());
@@ -55,7 +58,6 @@ public class OpenApiClientGeneratorWrapper {
     }
 
     public List<File> generate() {
-        // TODO: the output should be <package>.Class, not src/main/java
         return generator.opts(configurator.toClientOptInput()).generate();
     }
 }

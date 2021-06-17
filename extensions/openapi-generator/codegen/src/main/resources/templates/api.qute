@@ -13,11 +13,10 @@ import java.util.Map;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.MediaType;
-import org.jboss.resteasy.annotations.jaxrs.*;
 
-{#insert disableMultipart}
+{#if !disableMultipart && !disableMultipart.Empty}
 import org.apache.cxf.jaxrs.ext.multipart.*;
-{/}
+{/if}
 
 {#if appName}
 /**

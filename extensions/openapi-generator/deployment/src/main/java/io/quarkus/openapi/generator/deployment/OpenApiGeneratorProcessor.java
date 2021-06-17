@@ -1,5 +1,6 @@
 package io.quarkus.openapi.generator.deployment;
 
+import io.quarkus.deployment.Feature;
 import io.quarkus.deployment.annotations.BuildProducer;
 import io.quarkus.deployment.annotations.BuildStep;
 import io.quarkus.deployment.builditem.CombinedIndexBuildItem;
@@ -10,12 +11,9 @@ import io.quarkus.deployment.builditem.nativeimage.ReflectiveClassBuildItem;
 
 class OpenApiGeneratorProcessor {
 
-    // TODO: add to Feature Enum io.quarkus.deployment.Feature.OPENAPI
-    private static final String FEATURE = "openapi-generator-extension";
-
     @BuildStep
     FeatureBuildItem feature() {
-        return new FeatureBuildItem(FEATURE);
+        return new FeatureBuildItem(Feature.OPENAPI_GENERATOR);
     }
 
     @BuildStep

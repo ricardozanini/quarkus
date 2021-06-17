@@ -41,7 +41,7 @@ public abstract class OpenApiGeneratorCodeGenBase implements CodeGenProvider {
                     final List<String> openApiFiles = openApiFilesPaths
                             .filter(Files::isRegularFile)
                             .map(Path::toString)
-                            .filter(s -> s.endsWith(YAML) || s.endsWith(YML) || s.endsWith(JSON))
+                            .filter(s -> s.endsWith(this.inputExtension()))
                             .map(this::escapeWhitespace)
                             .collect(Collectors.toList());
                     for (String openApiFile : openApiFiles) {

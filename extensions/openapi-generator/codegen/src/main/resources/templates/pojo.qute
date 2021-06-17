@@ -39,7 +39,7 @@ public class {m.classname} {#if m.parent}extends {m.parent}{/if}{#if m.serializa
     {#if v.isEnum}
     {#if v.isContainer && v.mostInnerItems}
     {#include enumClass.qute e=v/}
-    {#else !v.isContainer}{#include enumClass.qute e=v/}{/if}
+    {#else if !v.isContainer}{#include enumClass.qute e=v/}{/if}
     {/if}
     {#if m.withXml}
     @XmlElement(name="{v.basename}"{#if v.required}, required = {v.required}{/if})
@@ -78,12 +78,12 @@ public class {m.classname} {#if m.parent}extends {m.parent}{/if}{#if m.serializa
     {ext}
     {/for}
     {#if v.useBeanValidation}{#include beanValidation.qute p=v/}{/if}
-    {#if m.withXml && v.isEnum && !v.isArray && !v.isMap}public {v.dataType} {v.getter}() {
+    {#if (m.withXml || !m.withXml.Empty) && v.isEnum && !v.isArray && !v.isMap}public {v.dataType} {v.getter}() {
         if({v.name} == null) {
             return null;
         }
         return {v.name}.value();
-    }{#else if !m.withXml && v.isEnum && !v.isArray && !v.isMap} public {v.datatypeWithEnum} {v.getter}() {
+    }{#else if (!m.withXml || m.withXml.Empty) && v.isEnum && !v.isArray && !v.isMap} public {v.datatypeWithEnum} {v.getter}() {
         return {v.name};
     }{#else if v.isEnum && (v.isArray || v.isMap)} public {v.datatypeWithEnum} {v.getter}() {
         return {v.name};

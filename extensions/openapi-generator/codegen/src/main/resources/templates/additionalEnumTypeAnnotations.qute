@@ -1,1 +1,1 @@
-{#for annon in e.additionalEnumTypeAnnotations}{annon}{/for}
+{#for annon in e.additionalEnumTypeAnnotations.orEmpty}{annon}{/for}

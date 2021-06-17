@@ -8,6 +8,11 @@ public class QuarkusJavaClientCodegen extends JavaClientCodegen {
         // TODO: immutable properties
         this.setDateLibrary(JavaClientCodegen.JAVA8_MODE);
         this.setTemplateDir("templates");
+        // we are only interested in the main generated classes
+        this.projectFolder = "";
+        this.projectTestFolder = "";
+        this.sourceFolder = "";
+        this.testFolder = "";
     }
 
     @Override
