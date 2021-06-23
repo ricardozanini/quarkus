@@ -67,6 +67,10 @@
           <groupId>org.slf4j</groupId>
           <artifactId>slf4j-ext</artifactId>
         </exclusion>
+        <exclusion>
+          <groupId>com.github.jknack</groupId>
+          <artifactId>*</artifactId>
+        </exclusion>
       </exclusions>
     </dependency>
     <!-- forcing correct versions by openapi-generator -->
@@ -101,6 +105,12 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-ext</artifactId>
       <version>1.7.29</version>
+    </dependency>
+    <!-- the version imported from wiremock causing conflicts -->
+    <dependency>
+      <groupId>com.github.jknack</groupId>
+      <artifactId>handlebars-jackson2</artifactId>
+      <version>4.2.0</version>
     </dependency>
 
     <dependency>

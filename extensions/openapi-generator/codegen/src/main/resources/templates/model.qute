@@ -7,6 +7,7 @@ import {imp.import};
 
 import java.io.Serializable;
 {/if}
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 {#if useBeanValidation}
 
 import javax.validation.constraints.*;

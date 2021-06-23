@@ -8,15 +8,8 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlEnumValue;
 {#else}
 import java.lang.reflect.Type;
-import javax.json.bind.annotation.JsonbTypeDeserializer;
-import javax.json.bind.annotation.JsonbTypeSerializer;
-import javax.json.bind.serializer.DeserializationContext;
-import javax.json.bind.serializer.JsonbDeserializer;
-import javax.json.bind.serializer.JsonbSerializer;
-import javax.json.bind.serializer.SerializationContext;
-import javax.json.stream.JsonGenerator;
-import javax.json.stream.JsonParser;
-import javax.json.bind.annotation.JsonbProperty;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 {/if}
 
 {#if m.withXml}
@@ -26,7 +19,9 @@ import javax.json.bind.annotation.JsonbProperty;
 }){#else}
 @XmlType(name = "{m.classname}")
 {/if}
-{#insert m.parent}@XmlRootElement(name = "{m.classname}"){/}
+{#if !m.parent || m.parent.isEmpty}@XmlRootElement(name = "{m.classname}"){/if}
+{#else}
+@JsonIgnoreProperties(ignoreUnknown = true)
 {/if}
 {#if m.description}
 /**
@@ -35,11 +30,14 @@ import javax.json.bind.annotation.JsonbProperty;
 {/if}
 {#include additionalModelTypeAnnotations.qute m=m/}
 public class {m.classname} {#if m.parent}extends {m.parent}{/if}{#if m.serializableModel} implements Serializable{/if} {
+
     {#for v in m.vars}
     {#if v.isEnum}
     {#if v.isContainer && v.mostInnerItems}
     {#include enumClass.qute e=v/}
-    {#else if !v.isContainer}{#include enumClass.qute e=v/}{/if}
+    {#else if !v.isContainer}
+
+    {#include enumClass.qute e=v/}{/if}
     {/if}
     {#if m.withXml}
     @XmlElement(name="{v.basename}"{#if v.required}, required = {v.required}{/if})
@@ -72,7 +70,7 @@ public class {m.classname} {#if m.parent}extends {m.parent}{/if}{#if m.serializa
     * @return {v.name}
     **/
     {#if !m.withXml}
-    @JsonbProperty("{v.baseName}")
+    @JsonProperty("{v.baseName}")
     {/if}
     {#for ext in v.vendorExtensions.x-extra-annotation.orEmpty}
     {ext}

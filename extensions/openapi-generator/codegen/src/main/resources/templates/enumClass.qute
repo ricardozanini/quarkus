@@ -1,11 +1,7 @@
 {#if e.withXml}
     @XmlType(name="{e.datatypeWithEnum}")
     @XmlEnum({e.dataType}.class)
-{#else}
-    @JsonbTypeSerializer({e.datatypeWithEnum}.Serializer.class)
-    @JsonbTypeDeserializer({e.datatypeWithEnum}.Deserializer.class)
 {/if}
-
     {#include additionalEnumTypeAnnotations.qute e=e /}public enum {e.datatypeWithEnum} {
         {#if e.allowableValues}
         {#if e.withXml}
@@ -38,25 +34,6 @@
                 }
             }
             {#if e.useNullForUnknownEnumValue}return null;{#else}throw new IllegalArgumentException("Unexpected value '" + v + "'");{/if}
-        }
-        {#else}
-        public static final class Deserializer implements JsonbDeserializer<{e.datatypeWithEnum}> {
-            @Override
-            public {e.datatypeWithEnum} deserialize(JsonParser parser, DeserializationContext ctx, Type rtType) {
-                for ({#if e.datatypeWithEnum}{e.datatypeWithEnum}{#else}{e.classname}{/if} b : {#if e.datatypeWithEnum}{e.datatypeWithEnum}{#else}{e.classname}{/if}.values()) {
-                    if (String.valueOf(b.value).equals(parser.getString())) {
-                        return b;
-                    }
-                }
-                {#if e.useNullForUnknownEnumValue}return null;{#else}throw new IllegalArgumentException("Unexpected value '" + parser.getString() + "'");{/if}
-            }
-        }
-
-        public static final class Serializer implements JsonbSerializer<{e.datatypeWithEnum}> {
-            @Override
-            public void serialize({e.datatypeWithEnum} obj, JsonGenerator generator, SerializationContext ctx) {
-                generator.write(obj.value);
-            }
         }
         {/if}
     }

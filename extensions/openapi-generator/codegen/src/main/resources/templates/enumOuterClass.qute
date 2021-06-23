@@ -1,11 +1,10 @@
-{#if e.jackson}
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-{/if}
 
 /**
  * {#insert e.description}Gets or Sets {e.name}{/}{#if e.description}{description}{/}
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 {#include additionalEnumTypeAnnotations.qute e=e/}public enum {#if e.datatypeWithEnum}{e.datatypeWithEnum}{#else}{e.classname}{/if} {
     private {e.dataType} value;
 
@@ -14,12 +13,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
     }
 
     @Override
-    {#if e.jackson}@JsonValue{/}
+    @JsonValue
     public String toString() {
         return String.valueOf(value);
     }
 
-    {#if e.jackson}@JsonCreator{/}
+    @JsonCreator
     public static {#if e.datatypeWithEnum}{e.datatypeWithEnum}{#else}{e.classname}{/if} fromValue(String text) {
         for ({#if e.datatypeWithEnum}{e.datatypeWithEnum}{#else}{e.classname}{/if} b : {#if e.datatypeWithEnum}{e.datatypeWithEnum}{#else}{e.classname}{/if}.values()) {
             if (String.valueOf(b.value).equals(text)) {

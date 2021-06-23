@@ -18,6 +18,11 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-core</artifactId>
     </dependency>
+    <!-- This should be a user choice -->
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-rest-client-jackson</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <!-- Mark this as a runtime dependency, so to make sure it's included on the final classpath during native-image -->
